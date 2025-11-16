@@ -1,0 +1,43 @@
+.form-group {
+    
+    &.form-group {
+        margin-top: 16px;
+    }
+
+    &__label {
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    &__input-wrapper {
+        display: flex;
+        align-content: center;
+        gap: 16px;
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: border-color linear 0.2s;
+
+        &:hover {
+            border-color: #4f46e5;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        font-size: 14px;
+    }
+
+
+    &__input-img {
+        width: 24px;
+        opacity: 0.6;
+    }
+}
+
+
+
+

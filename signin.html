@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- style -->
+     <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body>
+    <main class="bg" style="height: 100vh;">
+        <div class="bg__img">
+            <div class="container">
+                <div class="bg__content">
+                    <div class="row">
+                        <div class="col-6 col-md-12 col-lg-12">
+                            <div class="login">
+                                <h1 class="login__heading">Sign In</h1>
+                                <form id="login-form">
+                                    <div class="form-group">
+                                        <label for="username" class="form-group__label">Username:</label>
+                                        <div class="form-group__input-wrapper">
+                                            <input type="text" class="form-group__input" id="username" placeholder="Enter username" required>
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="form-group__label">Password:</label>
+                                        <div class="form-group__input-wrapper">
+                                            <input type="password" class="form-group__input" id="password" min="6" placeholder="Enter password" required>
+                                            <i class="fa-solid fa-lock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" id="terms" name="terms" required>
+                                        <label for="terms" style="margin-left: 12px;">
+                                            Remember Me
+                                        </label>
+                                    </div>
+                                    <button class="btn" style="margin-top: 60px;">Login</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-12 col-lg-12">
+                            <img src="./assets/img/signup/signup-img.png" alt="" class="login__img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

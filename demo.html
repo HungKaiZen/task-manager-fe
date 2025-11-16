@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Gender Dropdown</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background: #fff;
+      padding: 28px 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+    }
+
+    h3 {
+      margin-bottom: 18px;
+      color: #111827;
+    }
+
+    /* --- Dropdown --- */
+    .dropdown {
+      position: relative;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .dropdown-btn {
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 15px;
+      color: #374151;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dropdown-btn:hover {
+      border-color: #4f46e5;
+    }
+
+    .dropdown-list {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      width: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: none;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .dropdown-list.active {
+      display: flex;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      color: #374151;
+    }
+
+    .dropdown-item:hover {
+      background: #f3f4f6;
+    }
+
+    .dropdown-item.selected {
+      background: #eef2ff;
+      color: #4f46e5;
+      font-weight: 500;
+    }
+
+    /* --- Terms --- */
+    .terms {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .terms a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    input[type="checkbox"] {
+      accent-color: #4f46e5;
+      cursor: pointer;
+    }
+
+    /* --- Button --- */
+    button {
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #3730a3;
+    }
+
+    .arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .arrow.rotate {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body>
+  <form id="genderForm">
+    <h3>Chọn giới tính:</h3>
+
+    <div class="dropdown" id="genderDropdown">
+      <div class="dropdown-btn" id="dropdownBtn">
+        <span id="dropdownSelected">-- Select Gender --</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="dropdown-list" id="dropdownList">
+        <div class="dropdown-item" data-value="Male">Male</div>
+        <div class="dropdown-item" data-value="Female">Female</div>
+        <div class="dropdown-item" data-value="Other">Other</div>
+      </div>
+    </div>
+
+    <div class="terms">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">I agree to all <a href="#">terms and conditions</a></label>
+    </div>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <script>
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownList = document.getElementById("dropdownList");
+    const dropdownSelected = document.getElementById("dropdownSelected");
+    const arrow = document.querySelector(".arrow");
+
+    let selectedGender = "";
+
+    dropdownBtn.addEventListener("click", () => {
+      dropdownList.classList.toggle("active");
+      arrow.classList.toggle("rotate");
+    });
+
+    document.querySelectorAll(".dropdown-item").forEach(item => {
+      item.addEventListener("click", () => {
+        document.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+        item.classList.add("selected");
+        selectedGender = item.dataset.value;
+        dropdownSelected.textContent = item.textContent;
+        dropdownList.classList.remove("active");
+        arrow.classList.remove("rotate");
+      });
+    });
+
+    // Đóng dropdown khi click ra ngoài
+    document.addEventListener("click", (e) => {
+      if (!dropdownBtn.contains(e.target) && !dropdownList.contains(e.target)) {
+        dropdownList.classList.remove("active");
+        arrow.classList.remove("rotate");
+      }
+    });
+
+    function submitForm() {
+      const agreed = document.getElementById("terms").checked;
+
+      if (!selectedGender) {
+        alert("Vui lòng chọn giới tính!");
+        return;
+      }
+      if (!agreed) {
+        alert("Vui lòng đồng ý điều khoản!");
+        return;
+      }
+
+      const payload = { gender: selectedGender, agreed };
+      console.log("Dữ liệu gửi:", payload);
+
+      // Gửi lên backend (ví dụ)
+      /*
+      fetch('/api/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      */
+
+      alert(`Giới tính: ${selectedGender}\nĐồng ý điều khoản: ${agreed}`);
+    }
+  </script>
+</body>
+</html>

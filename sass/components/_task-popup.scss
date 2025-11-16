@@ -1,0 +1,146 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity .3s;
+
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        animation: fadeIn 0.3s linear;
+    }
+    &.hide {
+        visibility: visible; /* cần để fade-out hoạt động */
+        opacity: 0;
+        animation: fadeOut 0.3s linear;
+    }
+
+}
+
+.popup {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+    animation: zoomIn 0.3s ease;
+
+    &.closing {
+        animation: zoomOut 0.3s ease forwards;
+    }
+}
+
+
+.task-popup {
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__heading {
+        font-size: 2.8rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 12px;
+        border-radius: 50%;
+        color: #333;
+        cursor: pointer;
+        background-color: #cfcfcf;
+
+        transition: background-color linear 0.2s;
+
+        &:hover {
+            background-color: #c1c1c1;
+        }
+
+    }
+
+    &__body {
+        margin-top: 24px;
+
+        &-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        &-title {
+            padding-top: 2px;
+            font-size: 1.6rem;
+            color: #333;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        &-desc {
+            font-size: 1.6rem;
+            color: #333;
+            line-height: 1.4;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: end;
+        gap: 12px;
+        margin-top: 32px;
+    }
+
+    &__make-complete-btn {
+        max-width: 240px;
+        padding: 8px 12px;
+        border-radius: 6px;
+        color: #fff;
+        background: #28a745;
+
+        &:hover {
+            background: #1f8f39;
+        }
+    }
+
+    &__btn {
+        max-width: 240px;
+        padding: 12px 14px;
+        border-radius: 6px;
+        color: #fff;
+
+        &--blue {
+            background: #1a85f8;
+            &:hover {
+                background: #007bff;
+            }
+        }
+
+        &--green {
+            background: #28a745;
+            &:hover {
+                background: #1a9336;
+            }
+        }
+
+        &--red {
+            background: rgb(227, 62, 62);
+
+            &:hover {
+                background: rgb(208, 45, 45);
+            }
+        }
+    }
+}

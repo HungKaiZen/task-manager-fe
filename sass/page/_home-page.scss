@@ -1,0 +1,33 @@
+@use "../abstracts";
+.home-page {
+    
+   &__container {
+    padding: 60px 0;
+   }
+
+   &__content {
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+   }
+
+   &__heading {
+    width: 280px;
+    margin-bottom: 32px;
+    font-size: 4.2rem;
+    text-align: left;
+    border-bottom: 2px solid var(--primary-color);
+
+    @include abstracts.screen(md) {
+        font-size: 3.2rem;
+    }
+   }
+
+
+   &__title {
+    margin-bottom: 12px;
+    font-size: 2.8rem;
+    text-align: center;
+   }
+}

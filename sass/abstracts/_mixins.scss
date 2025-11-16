@@ -1,0 +1,19 @@
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);
+
+@mixin screen($key) {
+    $dimension: map-get($grid-breakpoints, $key);
+
+    @if ($dimension) {
+        @media (max-width: ($dimension - 0.2)) {
+            @content;
+        }
+    } @else {
+        @error ('The #{$key} value is not gird-breakpoints list' );
+    }
+}

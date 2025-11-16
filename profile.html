@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Task Manager</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    
+
+
+
+</head>
+<body>
+    <main class="home-page">
+        <!-- Header -->
+         <header id="header" class="header">
+         </header>
+
+        <!-- Body -->
+        <div class="container">
+            <div class="profile">
+                <div class="profile__header">
+                    <h1 class="profile__heading">Account Information</h1>
+                    <a href="#" class="profile__back-link">Go Back</a>
+                </div>
+                <div class="profile__user">
+                    <img src="./assets/img/user.png" alt="avatar">
+                    <div>
+                        <p class="profile__user-name">Sundar Gurung</p>
+                        <p class="profile__user-username">Sundar Gurung</p>
+                    </div>
+                </div>
+                <div class="profile__form">
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="fullname" class="form-group__label">Full name:</label>
+                            <div class="form-group__input-wrapper">
+                                <input type="text" class="form-group__input" id="fullname" placeholder="Enter full name" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday" class="form-group__label">Birthday:</label>
+                            <div class="form-group__input-wrapper">
+                                <input type="date" class="form-group__input" id="birthday" placeholder="Enter your birthday" required>
+                                <i class="fa-solid fa-cake-candles"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender" class="form-group__label" style="margin-bottom: 12px; display: block;">Gender:</label>
+                            <div class="dropdown" id="genderDropdown">
+                                <div class="dropdown-btn" id="dropdownBtn">
+                                    <span id="dropdownSelected">Select Gender</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="dropdown-list" id="dropdownList">
+                                    <div class="dropdown-item" data-value="Male">Male</div>
+                                    <div class="dropdown-item" data-value="Female">Female</div>
+                                    <div class="dropdown-item" data-value="Other">Other</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-group__label">Email:</label>
+                            <div class="form-group__input-wrapper">
+                                <input type="text" class="form-group__input" id="email" placeholder="Enter email" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber" class="form-group__label">phoneNumber:</label>
+                            <div class="form-group__input-wrapper">
+                                <input type="text" class="form-group__input" id="phoneNumber" placeholder="Enter phone number" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="form-group__label">Address:</label>
+                            <div class="form-group__input-wrapper">
+                                <input type="text" class="form-group__input" id="address" placeholder="Enter address" required>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="profile__btn">
+                            <button class="btn">Update Info</button>
+                            <a href="./change-password.html" class="btn profile__btn-change-password">Change Paswword</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const dropdownBtn = document.getElementById("dropdownBtn");
+        const dropdownList = document.getElementById("dropdownList");
+        const dropdownSelected = document.getElementById("dropdownSelected");
+        const arrow = document.querySelector(".arrow");
+
+        let selectedGender = "";
+
+        dropdownBtn.addEventListener("click", () => {
+        dropdownList.classList.toggle("active");
+        arrow.classList.toggle("rotate");
+        });
+
+        document.querySelectorAll(".dropdown-item").forEach(item => {
+        item.addEventListener("click", () => {
+            document.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+            item.classList.add("selected");
+            selectedGender = item.dataset.value;
+            dropdownSelected.textContent = item.textContent;
+            dropdownList.classList.remove("active");
+            arrow.classList.remove("rotate");
+        });
+        });
+
+        // Đóng dropdown khi click ra ngoài
+        document.addEventListener("click", (e) => {
+        if (!dropdownBtn.contains(e.target) && !dropdownList.contains(e.target)) {
+            dropdownList.classList.remove("active");
+            arrow.classList.remove("rotate");
+        }
+        });
+    </script>
+
+    <script src="./assets/js/components/include.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
+
+
+

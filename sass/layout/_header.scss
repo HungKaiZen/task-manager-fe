@@ -1,0 +1,210 @@
+@use "../abstracts";
+
+.header {
+    padding: 36px 0;
+    background-color: #F8F8F8;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include abstracts.screen(md) {
+            justify-content: flex-start;
+    }
+
+    &__center {
+        display: flex;
+        justify-content: space-between;
+        max-width: 700px;
+        width: 100%;
+        height: 36px;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 2px 2px 2px rgba($color: #000, $alpha: 0.02);
+
+        
+    }
+    &__input {
+        width: 100%;
+        padding: 0 24px;
+        color: #A1A3AB;
+        font-size: 16px;
+        &-icon-warpper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background-color: #FF6767;
+        }
+        &-icon {
+            width: 16px;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 6px;
+        background-color: #FF6767;
+
+        &:hover {
+            background-color: #f45e5e;
+        }
+    }
+
+    &__group-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 32px;
+
+        display: none;
+    }
+
+    &__group-btn a {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding: 8px 12px;
+    }
+
+
+    &__user {
+        visibility: visible;
+        position: relative;
+        margin-left: 12px;
+        padding-left: 20px;
+        &-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+        
+         &:hover {
+                .dropdown-menu {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                    pointer-events: auto;
+                }
+            }
+    }
+    
+
+   
+}
+
+
+// dropdown-menu
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 20px);
+    right: -20PX;
+    visibility: hidden;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0px 4px 40px rgba($color: #000000, $alpha: 0.1);
+    opacity: 0;
+    transform: scale(0.95) translateY(-8px);
+    transform-origin: top right;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -20px;
+        width: 100%;
+        height: 24px;
+        background-color: transparent;
+    }
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -12px;
+        right: 24px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 12px solid #fff;
+    }
+
+    &__content {
+        padding: 24px;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__avatar {
+        max-width: 64px;
+    }
+
+    &__user {
+
+        &-name {
+            color: #333;
+            font-size: 1.6rem;
+            white-space: nowrap;
+        }
+
+        &-username {
+            margin-top: 4px;
+            color: #666666;
+            font-size: 1.4rem;
+        }
+    }
+
+    &__list {
+        margin-top: 12px;
+    }
+
+    &__item {
+        // padding: 12px 8px;
+    }
+
+    &__link {
+        display: block;
+        padding: 12px 8px;
+        color: #333;
+        border-radius: 6px;
+        &:hover {
+            color: #fff;
+            background-color: var(--primary-color);
+        }
+    }
+
+
+}
+
+
+
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

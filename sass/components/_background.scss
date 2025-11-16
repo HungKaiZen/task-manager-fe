@@ -1,0 +1,26 @@
+@use "../abstracts";
+.bg {
+    height: 100vh;
+    background-color: var(--primary-color);
+
+
+    @include abstracts.screen(md) {
+        height: 100%;
+    }
+
+    &__img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: inherit;
+        padding: 60px 0;
+        background-image: url('../../assets/img/bg/bg1.png');
+    }
+
+
+    &__content {
+        padding: 32px;
+        border-radius: 12px;
+        background-color: #fff;
+    }
+}

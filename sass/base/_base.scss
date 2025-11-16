@@ -1,0 +1,151 @@
+@use "../abstracts";
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #FF6767;
+    --secondary-color: #4f5a5a;
+    --tertiary-color: var(--tertiary-color);
+    --bg-color-1: #e0eae5;
+    --bg-color-2: #fff;
+    --bg-color-3: #b5ed3d;
+
+    --icon: brightness(0) saturate(100%) invert(0%) sepia(77%) saturate(7443%)
+        hue-rotate(179deg) brightness(92%) contrast(95%);
+
+    --icon-error: brightness(0) saturate(100%) invert(40%) sepia(35%)
+        saturate(5331%) hue-rotate(338deg) brightness(104%) contrast(108%);
+
+    --icon-logo: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(0%) hue-rotate(268deg) brightness(105%) contrast(101%);
+}
+
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+input,
+button {
+    outline: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+.customer-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.dot-menu {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 1px solid #A1A3AB;
+}
+
+
+.logo-text {
+    font-size: 32px;
+}
+
+.logo-text-primary {
+    color: var(--primary-color);
+}
+
+.logo-text-black {
+    color: #000;
+}
+
+.heading {
+    color: var(--primary-color);
+    font-size: 7rem;
+    font-weight: 800;
+    line-height: 1.14;
+
+    @include abstracts.screen(xl) {
+        font-size: 5.6rem;
+    }
+
+    @include abstracts.screen(lg) {
+        font-size: 4.2rem;
+    }
+
+    @include abstracts.screen(md) {
+        // text-align: center;
+        font-size: 3.2rem;
+    }
+}
+
+.section__heading {
+    max-width: 570px;
+    color: var(--primary-color);
+    font-size: 4.2rem;
+    font-weight: 800;
+    line-height: 1.24;
+
+    @include abstracts.screen(xl) {
+        font-size: 3.6rem;
+    }
+
+    @include abstracts.screen(lg) {
+        font-size: 3.2rem;
+    }
+
+    @include abstracts.screen(md) {
+        font-size: 2.2rem;
+    }
+}
+
+.section__desc {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    line-height: 1.66;
+
+    @include abstracts.screen(xl) {
+        font-size: 1.6rem;
+    }
+
+    @include abstracts.screen(md) {
+        // text-align: center;
+    }
+}
+
+.separate {
+    width: 100%;
+    height: 1.5px;
+    margin: 28px 0;
+    border-radius: 1px;
+    background: #bfcec6;
+}

@@ -1,0 +1,12 @@
+.btn {
+    max-width: 200px;
+    height: 60px;
+    padding: 16px 32px;
+    border-radius: 8px;
+    color: #fff;
+    background-color: var(--primary-color);
+
+    &:hover {
+        background-color: #f85f5f;
+    }
+}
