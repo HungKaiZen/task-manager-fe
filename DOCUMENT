@@ -1,0 +1,9 @@
+UI (dashboard.js)
+   ↓
+Service (task.service.js)
+   ↓
+API (task.api.js)
+   ↓
+httpClient.js
+   ↓
+Backend Spring Boot

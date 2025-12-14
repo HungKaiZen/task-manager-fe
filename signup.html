@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
 
     <!-- fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- style -->
-     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+
 </head>
+
 <body>
     <main class="bg">
         <div class="bg__img">
@@ -26,13 +32,15 @@
                                 <div class="form-group">
                                     <label for="fullname" class="form-group__label">Full name:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="text" class="form-group__input" id="fullname" placeholder="Enter your full name" required>
+                                        <input type="text" class="form-group__input" id="fullname"
+                                            placeholder="Enter your full name" required>
                                         <i class="fa-solid fa-signature"></i>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="gender" class="form-group__label" style="margin-bottom: 12px; display: block;">Gender:</label>
-                                       <div class="dropdown" id="genderDropdown">
+                                    <label for="gender" class="form-group__label"
+                                        style="margin-bottom: 12px; display: block;">Gender:</label>
+                                    <div class="dropdown" id="genderDropdown">
                                         <div class="dropdown-btn" id="dropdownBtn">
                                             <span id="dropdownSelected">Select Gender</span>
                                             <span class="arrow">▼</span>
@@ -42,50 +50,55 @@
                                             <div class="dropdown-item" data-value="Female">Female</div>
                                             <div class="dropdown-item" data-value="Other">Other</div>
                                         </div>
-                                        </div>
+                                    </div>
                                 </div>
-                               <div class="form-group">
+                                <div class="form-group">
                                     <label for="birthday" class="form-group__label">Birthday:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="date" class="form-group__input" id="birthday" placeholder="Enter your birthday" required>
+                                        <input type="date" class="form-group__input" id="birthday"
+                                            placeholder="Enter your birthday" required>
                                         <i class="fa-solid fa-cake-candles"></i>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="form-group__label">Email:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="text" class="form-group__input" id="email" placeholder="Enter your email" required>
+                                        <input type="text" class="form-group__input" id="email"
+                                            placeholder="Enter your email" required>
                                         <i class="fa-solid fa-envelope"></i>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="username" class="form-group__label">Username:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="text" class="form-group__input" id="username" placeholder="Enter your username" required>
+                                        <input type="text" class="form-group__input" id="username"
+                                            placeholder="Enter your username" required>
                                         <i class="fa-solid fa-user"></i>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="phoneNumber" class="form-group__label">Phone number:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="tel" class="form-group__input" id="phoneNumber" placeholder="Enter your phone number" required>
+                                        <input type="tel" class="form-group__input" id="phoneNumber"
+                                            placeholder="Enter your phone number" required>
                                         <i class="fa-solid fa-phone"></i>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="address" class="form-group__label">Address:</label>
                                     <div class="form-group__input-wrapper">
-                                        <input type="text" class="form-group__input" id="address" placeholder="Enter your address" required>
+                                        <input type="text" class="form-group__input" id="address"
+                                            placeholder="Enter your address" required>
                                         <i class="fa-solid fa-location-dot"></i>
                                     </div>
                                 </div>
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <input type="checkbox" id="terms" name="terms" required>
                                     <label for="terms" style="margin-left: 12px;">
                                         I agree to all <a href="#" style="color: #FF6767;">terms and conditions</a>
                                     </label>
-                                 </div>
-                                 <button class="btn" style="margin-top: 16px;">Register</button>
+                                </div>
+                                <button class="btn" style="margin-top: 16px;">Register</button>
                             </form>
                         </div>
                     </div>
@@ -101,65 +114,65 @@
 
 
 
-<script>
-    const dropdownBtn = document.getElementById("dropdownBtn");
-    const dropdownList = document.getElementById("dropdownList");
-    const dropdownSelected = document.getElementById("dropdownSelected");
-    const arrow = document.querySelector(".arrow");
+    <script>
+        const dropdownBtn = document.getElementById("dropdownBtn");
+        const dropdownList = document.getElementById("dropdownList");
+        const dropdownSelected = document.getElementById("dropdownSelected");
+        const arrow = document.querySelector(".arrow");
 
-    let selectedGender = "";
+        let selectedGender = "";
 
-    dropdownBtn.addEventListener("click", () => {
-      dropdownList.classList.toggle("active");
-      arrow.classList.toggle("rotate");
-    });
+        dropdownBtn.addEventListener("click", () => {
+            dropdownList.classList.toggle("active");
+            arrow.classList.toggle("rotate");
+        });
 
-    document.querySelectorAll(".dropdown-item").forEach(item => {
-      item.addEventListener("click", () => {
-        document.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
-        item.classList.add("selected");
-        selectedGender = item.dataset.value;
-        dropdownSelected.textContent = item.textContent;
-        dropdownList.classList.remove("active");
-        arrow.classList.remove("rotate");
-      });
-    });
+        document.querySelectorAll(".dropdown-item").forEach(item => {
+            item.addEventListener("click", () => {
+                document.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+                item.classList.add("selected");
+                selectedGender = item.dataset.value;
+                dropdownSelected.textContent = item.textContent;
+                dropdownList.classList.remove("active");
+                arrow.classList.remove("rotate");
+            });
+        });
 
-    // Đóng dropdown khi click ra ngoài
-    document.addEventListener("click", (e) => {
-      if (!dropdownBtn.contains(e.target) && !dropdownList.contains(e.target)) {
-        dropdownList.classList.remove("active");
-        arrow.classList.remove("rotate");
-      }
-    });
+        // Đóng dropdown khi click ra ngoài
+        document.addEventListener("click", (e) => {
+            if (!dropdownBtn.contains(e.target) && !dropdownList.contains(e.target)) {
+                dropdownList.classList.remove("active");
+                arrow.classList.remove("rotate");
+            }
+        });
 
-    function submitForm() {
-      const agreed = document.getElementById("terms").checked;
+        function submitForm() {
+            const agreed = document.getElementById("terms").checked;
 
-      if (!selectedGender) {
-        alert("Vui lòng chọn giới tính!");
-        return;
-      }
-      if (!agreed) {
-        alert("Vui lòng đồng ý điều khoản!");
-        return;
-      }
+            if (!selectedGender) {
+                alert("Vui lòng chọn giới tính!");
+                return;
+            }
+            if (!agreed) {
+                alert("Vui lòng đồng ý điều khoản!");
+                return;
+            }
 
-      const payload = { gender: selectedGender, agreed };
-      console.log("Dữ liệu gửi:", payload);
+            const payload = { gender: selectedGender, agreed };
+            console.log("Dữ liệu gửi:", payload);
 
-      // Gửi lên backend (ví dụ)
-      /*
-      fetch('/api/user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      */
+            // Gửi lên backend (ví dụ)
+            /*
+            fetch('/api/user', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            */
 
-      alert(`Giới tính: ${selectedGender}\nĐồng ý điều khoản: ${agreed}`);
-    }
-  </script>
+            alert(`Giới tính: ${selectedGender}\nĐồng ý điều khoản: ${agreed}`);
+        }
+    </script>
 
 
 
@@ -169,4 +182,5 @@
 
 
 </body>
+
 </html>

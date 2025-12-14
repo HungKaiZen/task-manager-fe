@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <!-- fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- style -->
-     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <style>
+        body.fade-in {
+            opacity: 0;
+            animation: fadeIn 0.4s forwards;
+        }
+
+
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            display: flex;
+            align-items: center;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 1);
+            padding: 20px 30px;
+            border-radius: 8px;
+            z-index: 9999;
+            display: none;
+            text-align: center;
+        }
+
+        #loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        #loading-message {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
     <main class="bg" style="height: 100vh;">
         <div class="bg__img">
@@ -23,17 +101,20 @@
                                     <div class="form-group">
                                         <label for="username" class="form-group__label">Username:</label>
                                         <div class="form-group__input-wrapper">
-                                            <input type="text" class="form-group__input" id="username" placeholder="Enter username" required>
+                                            <input type="text" class="form-group__input" id="username"
+                                                placeholder="Enter username" required>
                                             <i class="fa-solid fa-user"></i>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="password" class="form-group__label">Password:</label>
                                         <div class="form-group__input-wrapper">
-                                            <input type="password" class="form-group__input" id="password" min="6" placeholder="Enter password" required>
+                                            <input type="password" class="form-group__input" id="password" min="6"
+                                                placeholder="Enter password" required>
                                             <i class="fa-solid fa-lock"></i>
                                         </div>
                                     </div>
+                                    <p id="form-group__error" class="form-group__error"></p>
                                     <div class="form-group">
                                         <input type="checkbox" id="terms" name="terms" required>
                                         <label for="terms" style="margin-left: 12px;">
@@ -52,5 +133,18 @@
             </div>
         </div>
     </main>
+
+    <!-- Spinner overlay -->
+    <div id="loading-overlay" class="hidden">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p id="loading-message" style="text-align: center;">Đang xử lý...</p>
+        </div>
+    </div>
+
+
+
+    <script type="module" src="./assets/js/page/login.js"></script>
 </body>
+
 </html>

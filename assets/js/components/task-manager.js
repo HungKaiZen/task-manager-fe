@@ -5,19 +5,40 @@ let currentFilter = "ALL";
 
 // get tasks from localStorage
 function getAllTasks() {
-    let saved = localStorage.getItem("tasks");
-    return saved ? JSON.parse(saved) : [];
-};
+    const saved = localStorage.getItem("tasks");
+
+    if (!saved || saved === "undefined") {
+        return [];
+    }
+
+    try {
+        return JSON.parse(saved);
+    } catch (e) {
+        console.error("Invalid JSON in localStorage:", saved);
+        localStorage.removeItem("tasks");
+        return [];
+    }
+}
+
 // save task when after update
 function saveTasks(tasks) {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    if (!tasks || tasks === "undefined") {
+        console.error("tasks is null ", tasks);
+    }
+
+    try {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    } catch (e) {
+        console.error("Save tasks in localStorage failed:", tasks);
+
+    }
 };
 
 // render tasks
 function renderTasks(tasks) {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
-    if(!tasks.length) {
+    if (!tasks.length) {
         list.innerHTML = `<p style='text-align: center; color: #777'>Không có task nào 😄</p>`;
     }
 
@@ -58,10 +79,10 @@ function applyFilters() {
 const overlayTask = document.getElementById("overlayDetail");
 const popupDetail = document.getElementById("popupDetail");
 const markDone = document.getElementById("markDone");
-const taskTitle  = document.getElementById("popupTaskTitle");
-const taskDesc  = document.getElementById("popupTaskDesc");
-const taskStatus  = document.getElementById("popupTaskStatus");
-const taskTDueTime  = document.getElementById("popupTaskDueTime");
+const taskTitle = document.getElementById("popupTaskTitle");
+const taskDesc = document.getElementById("popupTaskDesc");
+const taskStatus = document.getElementById("popupTaskStatus");
+const taskTDueTime = document.getElementById("popupTaskDueTime");
 // open task detail
 function openTaskDetail(taskId) {
     const task = allTasks.find(task => task.id === taskId);
@@ -72,7 +93,7 @@ function openTaskDetail(taskId) {
     taskTDueTime.innerText = task.dueTime;
     markDone.style.display = task.status === "COMPLETED" ? "none" : "inline-block";
     document.getElementById("updateDetail").style.display = task.status === "COMPLETED" ? "none" : "inline-block";
-    
+
     overlayDetail.classList.remove("hide");
     popupDetail.classList.remove("closing");
     overlayDetail.classList.add("show");
@@ -212,23 +233,21 @@ document.getElementById("taskDeleteForm").addEventListener("submit", (e) => {
 })
 
 
-// remove
-
 
 // init tasks
 allTasks = getAllTasks();
 
-if(allTasks.length === 0) {
+if (allTasks.length === 0) {
     allTasks = [
-        {'id': 1, 'title': 'Berand Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "IN_PROGRESS", 'dueTime': '15:30'},
-        {'id': 2, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '16:35'},
-        {'id': 3, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '09:55'},
-        {'id': 4, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '10:20'},
-        {'id': 5, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35'},
-        {'id': 6, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35'},
-        {'id': 7, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35'},
-        {'id': 8, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35'},
-        {'id': 9, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35'},
+        { 'id': 1, 'title': 'Berand Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "IN_PROGRESS", 'dueTime': '15:30' },
+        { 'id': 2, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '16:35' },
+        { 'id': 3, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '09:55' },
+        { 'id': 4, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "COMPLETED", 'dueTime': '10:20' },
+        { 'id': 5, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35' },
+        { 'id': 6, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35' },
+        { 'id': 7, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35' },
+        { 'id': 8, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35' },
+        { 'id': 9, 'title': 'Attend Nischal’s Birthday Party', 'desc': 'Buy gifts on the way and pick up cake from the bakery. (6 PM | Fresh Elements).....', 'status': "PENDING", 'dueTime': '15:35' },
     ];
 
 }
@@ -239,6 +258,6 @@ if(allTasks.length === 0) {
 document.getElementById("searchTask").addEventListener("input", applyFilters)
 saveTasks(allTasks);
 
-applyFilters();
+// applyFilters();
 
-// renderTasks(allTasks);
+renderTasks(allTasks);

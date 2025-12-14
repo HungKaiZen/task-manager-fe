@@ -5,17 +5,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity .3s;
+    z-index: 99;
 
     &.show {
         visibility: visible;
         opacity: 1;
         animation: fadeIn 0.3s linear;
     }
+
     &.hide {
-        visibility: visible; /* cần để fade-out hoạt động */
+        visibility: visible;
+        /* cần để fade-out hoạt động */
         opacity: 0;
         animation: fadeOut 0.3s linear;
     }
@@ -29,7 +32,7 @@
     padding: 24px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
     animation: zoomIn 0.3s ease;
 
     &.closing {
@@ -123,6 +126,7 @@
 
         &--blue {
             background: #1a85f8;
+
             &:hover {
                 background: #007bff;
             }
@@ -130,6 +134,7 @@
 
         &--green {
             background: #28a745;
+
             &:hover {
                 background: #1a9336;
             }

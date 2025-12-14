@@ -1692,11 +1692,16 @@ a {
 }
 .form-group__input {
   width: 100%;
-  font-size: 14px;
+  font-size: 1.6rem;
 }
 .form-group__input-img {
   width: 24px;
   opacity: 0.6;
+}
+.form-group__error {
+  margin-top: 12px;
+  color: rgb(203, 61, 61);
+  font-size: 1.2rem;
 }
 
 .bg {
@@ -1819,6 +1824,7 @@ a {
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.3s;
+  z-index: 99;
 }
 .overlay.show {
   visibility: visible;
@@ -1826,7 +1832,8 @@ a {
   animation: fadeIn 0.3s linear;
 }
 .overlay.hide {
-  visibility: visible; /* cần để fade-out hoạt động */
+  visibility: visible;
+  /* cần để fade-out hoạt động */
   opacity: 0;
   animation: fadeOut 0.3s linear;
 }
@@ -2179,6 +2186,8 @@ a {
   margin-bottom: 60px;
 }
 .login__img {
+  display: block;
+  margin-left: auto;
   max-width: 100%;
 }
 

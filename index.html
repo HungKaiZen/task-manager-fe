@@ -1,26 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Home | Task Manager</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/main.css" />
-    
+
     <!-- Fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        body.fade-in {
+            opacity: 0;
+            animation: fadeIn 0.4s forwards;
+        }
 
+        .hidden {
+            display: none;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 52%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 1);
+            padding: 20px 30px;
+            border-radius: 8px;
+            z-index: 9999;
+            display: none;
+            text-align: center;
+        }
+
+        #loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        #loading-message {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
     <main class="home-page">
         <!-- Header -->
-         <header id="header" class="header">
-         </header>
+        <header id="header" class="header">
+        </header>
 
         <!-- Body -->
-         <div class="task">
+        <div class="task">
             <div class="container">
                 <div class="task__container">
                     <h1 class="task__heading">Task Manager</h1>
@@ -35,7 +109,8 @@
                                     <button class="task__filter-btn" data-status="COMPLETED">Completed</button>
                                 </div>
                                 <div class="task__search-box">
-                                    <input type="text" class="task__search-input" id="searchTask" placeholder="🔍 Tìm kiếm task...">
+                                    <input type="text" class="task__search-input" id="searchTask"
+                                        placeholder="🔍 Tìm kiếm task...">
                                 </div>
                                 <button class="task__add-btn" id="addTaskBtn">+ Add Task</button>
                             </div>
@@ -62,48 +137,55 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
 
-         <!-- detail task -->
-          <div class="overlay" id="overlayDetail">
+        <!-- detail task -->
+        <div class="overlay" id="overlayDetail">
             <div class="popup task-popup" id="popupDetail">
                 <div class="task-popup__header">
                     <h1 class="task-popup__heading">Task Details</h1>
                     <span class="task-popup__close" id="popupTaskCloseBtn">
                         <i class="fa-solid fa-xmark"></i>
                     </span>
-                    
+
                 </div>
                 <div class="task-popup__body">
                     <div class="task-popup__body-row">
                         <p class="task-popup__body-title">Tiêu đề: </p>
-                        <p class="task-popup__body-desc" id="popupTaskTitle">Nếu bạn chỉ muốn một từ khôking space hoặc CSS word-break:</p>
+                        <p class="task-popup__body-desc" id="popupTaskTitle">Nếu bạn chỉ muốn một từ khôking space hoặc
+                            CSS word-break:</p>
                     </div>
                     <div class="task-popup__body-row">
                         <p class="task-popup__body-title">Nội dung: </p>
-                        <p class="task-popup__body-desc" id="popupTaskDesc">Nếu bạn chỉ muốn một từ không bị bẻ mà vẫn để phần còn lại tự động xuống dòng, hãy kết hợp HTML non-breaking space hoặc CSS word-break:</p>
+                        <p class="task-popup__body-desc" id="popupTaskDesc">Nếu bạn chỉ muốn một từ không bị bẻ mà vẫn
+                            để phần còn lại tự động xuống dòng, hãy kết hợp HTML non-breaking space hoặc CSS word-break:
+                        </p>
                     </div>
                     <div class="task-popup__body-row">
                         <p class="task-popup__body-title">Trạng thái: </p>
-                        <p class="task-popup__body-desc" id="popupTaskStatus">Nếu bạn chỉ muốn một từ không bị bẻ mà p HTML non-breaking space hoặc CSS word-break:</p>
+                        <p class="task-popup__body-desc" id="popupTaskStatus">Nếu bạn chỉ muốn một từ không bị bẻ mà p
+                            HTML non-breaking space hoặc CSS word-break:</p>
                     </div>
                     <div class="task-popup__body-row">
                         <p class="task-popup__body-title">Giờ đến hạn: </p>
-                        <p class="task-popup__body-desc" id="popupTaskDueTime">Nếu bạn chỉ muốn một từ không bị bẻ mà p HTML non-breaking space hoặc CSS word-break:</p>
+                        <p class="task-popup__body-desc" id="popupTaskDueTime">Nếu bạn chỉ muốn một từ không bị bẻ mà p
+                            HTML non-breaking space hoặc CSS word-break:</p>
                     </div>
                 </div>
                 <div class="task-popup__footer">
-                    <button class="task-popup__btn task-popup__btn--blue" id="updateDetail" onclick="openUpdateForm()">Update</button>
+                    <button class="task-popup__btn task-popup__btn--blue" id="updateDetail"
+                        onclick="openUpdateForm()">Update</button>
                     <button class="task-popup__btn task-popup__btn--green" id="markDone">Mark as Completed</button>
-                    <button class="task-popup__btn task-popup__btn--red" id="deleteTaskBtn" onclick="openDeleteForm()">Delete</button>
+                    <button class="task-popup__btn task-popup__btn--red" id="deleteTaskBtn"
+                        onclick="openDeleteForm()">Delete</button>
                 </div>
             </div>
-          </div>
+        </div>
 
 
 
-          <!-- update task -->
-          <div class="overlay" id="overlayUpdate">
+        <!-- update task -->
+        <div class="overlay" id="overlayUpdate">
             <div class="popup task-popup" id="popupUpdate">
                 <div class="task-popup__header">
                     <h1 class="task-popup__heading">Update Task</h1>
@@ -112,40 +194,45 @@
                     </span>
                 </div>
                 <div class="task-popup__body">
-                   <form id="taskUpdateForm">
+                    <form id="taskUpdateForm">
                         <div class="form-group">
                             <label for="updateTitle" class="form-group__label">Title:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="updateTitle" placeholder="Enter task title" required>
+                                <input type="text" class="form-group__input" id="updateTitle"
+                                    placeholder="Enter task title" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="updateDesc" class="form-group__label">Description:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="updateDesc" placeholder="Enter task description" required>
+                                <input type="text" class="form-group__input" id="updateDesc"
+                                    placeholder="Enter task description" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="updateStatus" class="form-group__label">Status:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="updateStatus" placeholder="Enter task status" required>
+                                <input type="text" class="form-group__input" id="updateStatus"
+                                    placeholder="Enter task status" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="updateDueTime" class="form-group__label">Due time:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="updateDueTime" placeholder="Enter task due time" required>
+                                <input type="text" class="form-group__input" id="updateDueTime"
+                                    placeholder="Enter task due time" required>
                             </div>
                         </div>
-                        <button class="task-popup__btn task-popup__btn--blue" id="updateTaskBtn" style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Update</button>
-                   </form>
+                        <button class="task-popup__btn task-popup__btn--blue" id="updateTaskBtn"
+                            style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Update</button>
+                    </form>
                 </div>
-              
-            </div>
-          </div>
 
-          <!-- create task -->
-          <div class="overlay" id="overlayCreate">
+            </div>
+        </div>
+
+        <!-- create task -->
+        <div class="overlay" id="overlayCreate">
             <div class="popup task-popup" id="popupCreate">
                 <div class="task-popup__header">
                     <h1 class="task-popup__heading">Create new Task</h1>
@@ -154,39 +241,45 @@
                     </span>
                 </div>
                 <div class="task-popup__body">
-                   <form id="taskCreateForm">
+                    <form id="taskCreateForm">
                         <div class="form-group">
                             <label for="createTitle" class="form-group__label">Title:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="createTitle" placeholder="Enter task title" required>
+                                <input type="text" class="form-group__input" id="createTitle"
+                                    placeholder="Enter task title" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="createDesc" class="form-group__label">Description:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="createDesc" placeholder="Enter task description" required>
+                                <input type="text" class="form-group__input" id="createDesc"
+                                    placeholder="Enter task description" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="createStatus" class="form-group__label">Status:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="createStatus" placeholder="Enter task status" required>
+                                <input type="text" class="form-group__input" id="createStatus"
+                                    placeholder="Enter task status" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="createDueTime" class="form-group__label">Due time:</label>
                             <div class="form-group__input-wrapper">
-                                <input type="text" class="form-group__input" id="createDueTime" placeholder="Enter task due time" required>
+                                <input type="text" class="form-group__input" id="createDueTime"
+                                    placeholder="Enter task due time" required>
                             </div>
                         </div>
-                        <button class="task-popup__btn task-popup__btn--blue" id="CreateTaskBtn" style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Create Task</button>
-                   </form>
+                        <button class="task-popup__btn task-popup__btn--blue" id="CreateTaskBtn"
+                            style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Create
+                            Task</button>
+                    </form>
                 </div>
             </div>
-          </div>
+        </div>
 
-          <!-- Delete task -->
-          <div class="overlay" id="overlayDelete">
+        <!-- Delete task -->
+        <div class="overlay" id="overlayDelete">
             <div class="popup task-popup" id="popupCreate">
                 <div class="task-popup__header">
                     <h1 class="task-popup__heading">Delete Task</h1>
@@ -196,17 +289,51 @@
                 </div>
                 <div class="task-popup__body">
                     <p>Do you wan't to delete this task</p>
-                   <form id="taskDeleteForm">
-                        <button class="task-popup__btn task-popup__btn--red" id="s" style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Comfirm</button>
-                        <button class="task-popup__btn " id="deleteTaskBtn" style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Cancel</button>
-                   </form>
+                    <form id="taskDeleteForm">
+                        <button class="task-popup__btn task-popup__btn--red" id="s"
+                            style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Comfirm</button>
+                        <button class="task-popup__btn " id="deleteTaskBtn"
+                            style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">Cancel</button>
+                    </form>
                 </div>
             </div>
-          </div>
-        
-    </main>
+        </div>
 
+        <!-- confirm logout -->
+        <div class="overlay" id="overlayLogout">
+            <div class="popup task-popup" id="popupLogout">
+                <div class="task-popup__header">
+                    <h1 class="task-popup__heading">Confirm logout</h1>
+                    <span class="task-popup__close" id="logoutCloseBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </span>
+                </div>
+                <div class="task-popup__body">
+                    <p>Do you want to logout?</p>
+                    <form id="logoutForm">
+                        <button type="submit" class="task-popup__btn task-popup__btn--red" id="btnLogout"
+                            style="margin-top: 32px; display: block; margin-left: auto; margin-right: auto; min-width: 120px;">
+                            Confirm
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spinner overlay -->
+        <div id="loading-overlay" class="hidden">
+            <div class="loading-container">
+                <div class="spinner"></div>
+                <div id="loading-message">Đang xử lý...</div>
+            </div>
+        </div>
+
+
+
+    </main>
+    <script type="module" src="./assets/js/page/logout.js"></script>
     <script src="./assets/js/components/include.js"></script>
     <script src="./assets/js/components/task-manager.js"></script>
 </body>
+
 </html>
